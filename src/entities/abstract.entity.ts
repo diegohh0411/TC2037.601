@@ -1,19 +1,12 @@
-import { Connection } from "mysql2/typings/mysql/lib/Connection";
-import { connection } from "../database.manager";
+import { databaseManager } from "../database.manager";
 
-export abstract class AbstractEntity {
-  id: string;
-  createdAt: Date;
-  updatedAt: Date;
-
-  db: Connection;
-
-  constructor() {
-    this.id = crypto.randomUUID();
-    this.createdAt = new Date();
-    this.updatedAt = new Date();
-    this.db = connection;
-  }
+export abstract class AbstractEntity<T> {
+  db = databaseManager;
 
   abstract setup(): void;
+
+  /**
+   * Should find all rows in the database of a specific table. The pagination object should contain the following properties: 'take' which is the number of rows to return, and 'skip' which is the number of rows to ignore before returning the results.
+   */
+  abstract findAll(pagination: { take: number, skip: number }): Promise<T[]>;
 }
