@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { User } from "../entities/user.entity";
+import { UserRepository } from "../../repositories/user.repository";
+import type { User } from "../../repositories/user.repository";
 
 const router = Router();
-const user = new User();
+const user = new UserRepository();
 
 router.get('/', async (req, res) => {
   const { take, skip } = req.body;
@@ -19,7 +20,17 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  // TO-DO!
+  const { items } = req.body;
+
+  if (!items || !Array.isArray(items)) {
+    throw new Error('You must provide the following parameters: items, of type User[]');
+  }
+
+  await user.create(items);
+  res.status(201).send({
+    message: 'Users created successfully',
+    users: items,
+  })
 })
 
 export const UserModule = router;

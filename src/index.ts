@@ -1,7 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 
-import { UserModule } from './modules/user.module';
+import { UserModule } from './modules/user/user.module';
 
 const app = express();
 app.use(express.json());

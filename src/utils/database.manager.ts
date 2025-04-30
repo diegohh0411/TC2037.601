@@ -2,7 +2,9 @@ import mysql from 'mysql2/promise';
 import { Connection } from 'mysql2/promise';
 
 class DatabaseManager {
+  instanceUuid: string;
   constructor() {
+    this.instanceUuid = crypto.randomUUID()
     this.start();
 
     const shutdown = async () => {
@@ -22,7 +24,7 @@ class DatabaseManager {
     const tryNo = 0;
 
     while (this.currentConnection === null && tryNo < maxTry) {
-      console.log(`Attempting to connect to the database... (${tryNo + 1}/${maxTry})`);
+      console.log(`[${this.instanceUuid}] Attempting to connect to the database... (${tryNo + 1}/${maxTry})`);
       try {
         this.currentConnection = await mysql.createConnection({
           host: process.env.DB_HOST,
@@ -45,6 +47,7 @@ class DatabaseManager {
     }
 
     try {
+      console.log(`[${this.instanceUuid}] Executing query:\n${query}\nWith values:\n${values}`);
       const [rows] = await this.currentConnection.query(query, values);
       return rows;
     } catch (error) {
