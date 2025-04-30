@@ -39,6 +39,7 @@ export class UserRepository extends AbstractRepository<User> {
     let query = `
       INSERT INTO user (full_name, email, password_hash, phone, created_at) VALUES `;
 
+
     for (const item of items) {
       const hashedPassword = await this.hashPassword(item.password);
       const createdAt = new Date().toISOString().slice(0, 19).replace('T', ' '); // Format to 'YYYY-MM-DD HH:MM:SS'
