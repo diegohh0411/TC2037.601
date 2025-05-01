@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Biombo - Mawi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1e1e1e] text-white min-h-screen flex">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#2b2b2b] p-4 flex flex-col justify-between">
+    <div>
+      <h1 class="text-xl font-semibold mb-6 flex items-center gap-2">🔘 Mawi</h1>
+      <nav class="space-y-2">
+        <a href="#" class="block bg-[#444444] text-white rounded-md px-3 py-2">Mi Biomo</a>
+        <a href="#" class="block hover:bg-[#444444] text-white rounded-md px-3 py-2">Explorador de Proyectos</a>
+        <a href="#" class="block hover:bg-[#444444] text-white rounded-md px-3 py-2">Asistente de Proyectos</a>
+      </nav>
+    </div>
+    <div class="mb-4">
+      <a href="#" class="flex items-center justify-center gap-2 bg-[#3a3a3a] text-sm text-white py-2 px-4 rounded-lg hover:bg-[#4a4a4a]">
+        📞 Contacta con el soporte
+      </a>
+    </div>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 p-6 flex flex-col justify-between">
+    <!-- Encabezado superior -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold">Mi Biomo</h2>
+      <div class="text-sm flex items-center gap-2">
+        Usuario <span class="text-xl">👤</span>
+      </div>
+    </div>
+
+    <!-- Cuerpo principal -->
+    <div>
+      <p class="text-sm text-gray-400 mb-4">Biomo ID:</p>
+      <div class="flex gap-4">
+        <button class="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2">
+          ⬆️ Subir Datos
+        </button>
+        <button class="bg-green-700 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2">
+          📄 Generar PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Input inferior -->
+    <div class="mt-10">
+      <div class="flex items-center bg-[#3a3a3a] rounded-full px-4 py-2">
+        <input type="text" placeholder="Escribe..." class="flex-1 bg-transparent outline-none text-white placeholder-gray-400" />
+        <button class="text-green-500 text-xl hover:text-green-600">⬆️</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

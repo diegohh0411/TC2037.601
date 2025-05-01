@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión - Mawi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1e1e1e] flex items-center justify-center min-h-screen">
+  <div class="bg-[#3a3a3a] p-8 rounded-xl w-full max-w-sm text-white shadow-md">
+    <h2 class="text-center text-2xl font-semibold mb-6">Iniciar sesión</h2>
+
+    <form class="space-y-4">
+      <div>
+        <label class="block text-sm mb-1">Correo electrónico</label>
+        <input type="email" placeholder="Escribe tu correo electrónico"
+               class="w-full px-4 py-2 rounded-lg bg-[#5a5a5a] text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-green-600">
+        <p class="text-green-600 text-xs mt-1">¿Has olvidado tu nombre de usuario?</p>
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Contraseña</label>
+        <input type="password" placeholder="Escribe tu contraseña"
+               class="w-full px-4 py-2 rounded-lg bg-[#5a5a5a] text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-green-600">
+        <p class="text-green-600 text-xs mt-1">¿Has olvidado tu contraseña?</p>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-green-700 hover:bg-green-800 transition text-white font-semibold py-2 rounded-lg">
+        Iniciar sesión
+      </button>
+    </form>
+  </div>
+</body>
+</html>
