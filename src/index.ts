@@ -2,11 +2,12 @@ import express from 'express';
 import 'dotenv/config';
 
 import { UserController } from './modules/user/user.controller';
+import { HtmlController } from './modules/html/html.controller';
 
 const app = express();
 app.use(express.json());
 
-app.get('/', (_req, res) => { res.send('Hello TypeScript!'); });
+app.use('/', HtmlController)
 
 app.use('/user', UserController);
 
