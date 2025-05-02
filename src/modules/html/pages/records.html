@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Records</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#1e1e1e] flex flex-col items-center p-6 gap-2 min-h-screen">
+
+  <div class="w-full max-w-3xl border border-gray-600 bg-gray-700 p-2 rounded grid grid-cols-3 text-white">
+    <p>Record Id</p>
+    <p>Tipo de Registro</p>
+    <p>Estado de Tiempo</p>
+  </div>
+
+  <%FOR%>
+  <form action="/api/record/update" method="post" class="w-full max-w-3xl border border-gray-600 p-2 rounded grid grid-cols-3 gap-1 text-white">
+    <p>{{record_id}}</p>
+    <input name="record_id" type="hidden" value="{{record_id}}" class="bg-transparent" />
+    <input name="tipo_registro" type="text" value="{{tipo_registro}}" class="bg-gray-800 border border-gray-600 rounded p-1" />
+    <input name="estado_tiempo" type="text" value="{{estado_tiempo}}" class="bg-gray-800 border border-gray-600 rounded p-1" />
+    <button type="submit" class="hidden"></button>
+  </form>
+  <%END%>
+
+</body>
+</html>

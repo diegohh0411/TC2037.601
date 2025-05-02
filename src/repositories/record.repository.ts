@@ -11,6 +11,16 @@ interface Record {
   created_at: Date;
 }
 
+export interface UpdateRecordDto {
+  record_id: number;
+  user_id?: number;
+  biomo_id?: number;
+  project_id?: number | null;
+  tipo_registro?: string;
+  estado_tiempo?: string;
+  estacion?: string;
+}
+
 export class RecordRepository extends AbstractRepository<Record> {
   async setup() {
     await this.db.query(`
@@ -30,6 +40,15 @@ export class RecordRepository extends AbstractRepository<Record> {
 
   async create(item: any) {
     return { note: "To do!" } as unknown as Record;
+  }
+
+  async update(item: UpdateRecordDto) {
+    const { record_id, ...rest } = item;
+    const queryResult = await this.db.query(`
+      UPDATE data_records SET ? WHERE record_id = ?
+    `, [rest, record_id]);
+
+    return queryResult as unknown as Record;
   }
 
   async findAll(pagination: { take: number, skip: number }) {

@@ -47,7 +47,7 @@ class DatabaseManager {
     }
 
     try {
-      console.log(`[${this.instanceUuid}] Executing query:\n${query}\nWith values:\n${values}`);
+      console.log(`[${this.instanceUuid}] Executing query:\n${query}\nWith values:\n${JSON.stringify(values)}`);
       const [rows] = await this.currentConnection.query(query, values);
       return rows;
     } catch (error) {

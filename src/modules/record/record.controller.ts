@@ -3,7 +3,7 @@ import { RecordRepository } from "../../repositories/record.repository";
 import { permittedParams } from "../../utils/other.utils";
 
 const router = Router();
-const recordRepository = new RecordRepository();
+export const recordRepository = new RecordRepository();
 
 router.get("/", async (req, res) => {
   const params = permittedParams(req.body, ['take', 'skip']);
@@ -14,6 +14,17 @@ router.get("/", async (req, res) => {
   };
 
   res.send(await recordRepository.findAll(pagination));
+}
+);
+
+router.post("/update", async (req, res) => {
+  const params = permittedParams(req.body, ['record_id'], ['estado_tiempo']);
+
+  console.log({ params })
+
+  await recordRepository.update(params)
+
+  res.redirect('/records');
 }
 );
 

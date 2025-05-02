@@ -1,15 +1,20 @@
 export const permittedParams = <T extends string>(
   obj: Record<T, any>,
-  properties: T[]
+  requiredProps: T[],
+  optionalProps: T[] = [],
 ): Record<T, any> => {
+  console.log({ obj, requiredProps, optionalProps });
+
   const permitted = Object.entries(obj)
-    .filter(([key, _value]) => properties.includes(key as T))
+    .filter(([key, _value]) => {
+      return requiredProps.includes(key as T) || optionalProps.includes(key as T);
+    })
     .reduce((acc: Record<T, any>, [key, value]) => {
       acc[key as T] = value;
       return acc;
     }, {} as Record<T, any>);
 
-  const missingProperties: string[] = properties.filter(property => {
+  const missingRequiredProperties: string[] = requiredProps.filter(property => {
     switch (typeof obj[property]) {
       case 'string':
         return obj[property].length === 0;
@@ -27,10 +32,10 @@ export const permittedParams = <T extends string>(
     }
   });
 
-  console.log({ missingProperties })
+  console.log({ missingProperties: missingRequiredProperties })
 
-  if (missingProperties.length > 0) {
-    throw new Error(`Missing required properties: ${missingProperties.join(', ')}`);
+  if (missingRequiredProperties.length > 0) {
+    throw new Error(`Missing required properties: ${missingRequiredProperties.join(', ')}`);
   }
 
   return permitted;

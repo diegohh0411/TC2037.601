@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const body = permittedParams<CreateUserDto>(req.body, ['given_name', 'family_name', 'email', 'password']);
+  const body = permittedParams(req.body, ['given_name', 'family_name', 'email', 'password']);
 
   await userRepository.create(body)
 
