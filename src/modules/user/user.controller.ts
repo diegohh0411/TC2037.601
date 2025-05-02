@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { UserRepository } from "../../repositories/user.repository";
+import { permittedParams } from "../../utils/other.utils";
+import { CreateUserDto } from "./user.dto";
 
 const router = Router();
 const userRepository = new UserRepository();
@@ -19,17 +21,11 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const { items } = req.body;
+  const body = permittedParams<CreateUserDto>(req.body, ['given_name', 'family_name', 'email', 'password']);
 
-  if (!items || !Array.isArray(items)) {
-    throw new Error('You must provide the following parameters: items, of type User[]');
-  }
+  await userRepository.create(body)
 
-  await userRepository.create(items);
-  res.status(201).send({
-    message: 'Users created successfully',
-    users: items,
-  })
+  res.redirect('/dashboard');
 })
 
 export const UserController = router;

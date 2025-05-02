@@ -9,7 +9,7 @@ export abstract class AbstractRepository<T> {
 
   abstract setup(): void;
 
-  abstract create(items: any[]): Promise<T[]>;
+  abstract create(item: any): Promise<T>;
 
   /**
    * Should find all rows in the database of a specific table. The pagination object should contain the following properties: 'take' which is the number of rows to return, and 'skip' which is the number of rows to ignore before returning the results.
