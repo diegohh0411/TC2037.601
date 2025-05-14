@@ -11,6 +11,12 @@ interface Record {
   created_at: Date;
 }
 
+export interface CreateRecordDto {
+  tipoRegistro: string;
+  estadoTiempo: string;
+  estacion: string;
+}
+
 export interface UpdateRecordDto {
   record_id: number;
   user_id?: number;
@@ -26,9 +32,9 @@ export class RecordRepository extends AbstractRepository<Record> {
     await this.db.query(`
       CREATE TABLE IF NOT EXISTS data_records (
         record_id        BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        user_id          BIGINT UNSIGNED NOT NULL,
-        biomo_id         BIGINT UNSIGNED NOT NULL,
-        project_id       BIGINT UNSIGNED NULL,
+        user_id          BIGINT UNSIGNED,
+        biomo_id         BIGINT UNSIGNED,
+        project_id       BIGINT UNSIGNED,
         tipo_registro    ENUM('fauna_transecto','fauna_punto_conteo','fauna_busqueda_libre',
                               'validacion_cobertura','parcela_vegetacion',
                               'camaras_trampa','variables_climaticas') NOT NULL,
@@ -38,8 +44,13 @@ export class RecordRepository extends AbstractRepository<Record> {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;`)
   }
 
-  async create(item: any) {
-    return { note: "To do!" } as unknown as Record;
+  async create(item: CreateRecordDto) {
+    const queryResult = await this.db.query(`
+      INSERT INTO data_records (tipo_registro, estado_tiempo, estacion)
+      VALUES (?, ?, ?)
+    `, [item.tipoRegistro, item.estadoTiempo, item.estacion]);
+
+    return queryResult as unknown as Record;
   }
 
   async update(item: UpdateRecordDto) {

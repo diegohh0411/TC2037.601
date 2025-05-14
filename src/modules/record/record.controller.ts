@@ -17,6 +17,14 @@ router.get("/", async (req, res) => {
 }
 );
 
+router.post("/", async (req, res) => {
+  const params = permittedParams(req.body, ['tipoRegistro', 'estadoTiempo', 'estacion']);
+
+  const newRecord = await recordRepository.create(params);
+
+  res.status(201).send(newRecord);
+});
+
 router.post("/update", async (req, res) => {
   const params = permittedParams(req.body, ['record_id'], ['estado_tiempo']);
 
